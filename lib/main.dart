@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -42,14 +43,14 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: Color.fromRGBO(246, 249, 255, 1),
+    return Scaffold(
+      backgroundColor: const Color.fromRGBO(246, 249, 255, 1),
       body: SafeArea(
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.only(top: 10),
-              child: Row(
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+          child: Column(
+            children: [
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   HeaderButton(
@@ -60,8 +61,43 @@ class MyHomePage extends StatelessWidget {
                   )
                 ],
               ),
-            ),
-          ],
+              Padding(
+                padding: const EdgeInsets.only(top: 12),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Hi, Santi 👋🏽',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
+                        ),
+                        Text(
+                          "Let's make habits together!",
+                          style: TextStyle(color: Color(0xff9B9BA1)),
+                        )
+                      ],
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 8, horizontal: 12),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          color: const Color(0xffDDF2FC)),
+                      child: const Text(
+                        "😇",
+                        style: TextStyle(fontSize: 24),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -76,21 +112,18 @@ class HeaderButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 30),
-      child: InkWell(
-        borderRadius: BorderRadius.all(Radius.elliptical(padding, padding)),
-        onTap: onTap ?? () => print("onTap Header Button"),
-        child: Container(
-          padding: const EdgeInsets.all(12),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.elliptical(padding, padding)),
-              border: Border.all(
-                  color: const Color.fromRGBO(234, 236, 240, 1), width: 2)),
-          child: Icon(
-            icon,
-            size: 24,
-          ),
+    return InkWell(
+      borderRadius: BorderRadius.all(Radius.elliptical(padding, padding)),
+      onTap: onTap ?? () => print("onTap Header Button"),
+      child: Container(
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.elliptical(padding, padding)),
+            border: Border.all(
+                color: const Color.fromRGBO(234, 236, 240, 1), width: 2)),
+        child: Icon(
+          icon,
+          size: 24,
         ),
       ),
     );
