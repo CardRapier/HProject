@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -43,6 +42,7 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: const Color.fromRGBO(246, 249, 255, 1),
       body: SafeArea(
@@ -50,6 +50,7 @@ class MyHomePage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
           child: Column(
             children: [
+              //TODO: remopve general padding, add padding to the header
               const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -62,7 +63,7 @@ class MyHomePage extends StatelessWidget {
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 12),
+                padding: const EdgeInsets.symmetric(vertical: 12),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -96,6 +97,86 @@ class MyHomePage extends StatelessWidget {
                   ],
                 ),
               ),
+              Container(
+                height: 35,
+                decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(20),
+                    ),
+                    color: Colors.grey.shade200),
+                child: DefaultTabController(
+                  length: 2,
+                  child: TabBar(
+                      indicatorSize: TabBarIndicatorSize.tab,
+                      dividerColor: Colors.transparent,
+                      indicatorPadding: const EdgeInsets.symmetric(
+                          horizontal: 4, vertical: 4),
+                      labelColor: Colors.blue,
+                      indicator: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                      ),
+                      tabs: [
+                        const Text(
+                          'Today',
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text(
+                              'Clubs',
+                            ),
+                            Container(
+                              margin:
+                                  const EdgeInsetsDirectional.only(start: 10),
+                              padding: const EdgeInsets.all(6),
+                              decoration: const BoxDecoration(
+                                  color: Colors.white, shape: BoxShape.circle),
+                              child: const Center(
+                                  child: Text(
+                                '2',
+                                style:
+                                    TextStyle(color: Colors.blue, fontSize: 10),
+                              )),
+                            )
+                          ],
+                        )
+                      ]),
+                ),
+              ),
+              //TODO: remove general padding, add padding to header, and here just add let vertical padding
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                child: SizedBox(
+                  height: 60,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(color: Colors.blue)),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 4),
+                        child: const Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              '3',
+                              style: TextStyle(fontSize: 18),
+                            ),
+                            Text(
+                              'SAT',
+                              style: TextStyle(fontSize: 10),
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              )
             ],
           ),
         ),
