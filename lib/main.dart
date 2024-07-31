@@ -193,7 +193,7 @@ class MyHomePage extends StatelessWidget {
               itemCount: daysOfMonth,
               itemBuilder: (context, i) {
                 final date = DateTime(now.year, now.month, i + 1);
-                var isSelected = now.day == i;
+                var isSelected = now.day == i + 1;
                 return Container(
                   width: 45,
                   decoration: BoxDecoration(
@@ -286,18 +286,29 @@ class MyHomePage extends StatelessWidget {
                 ),
                 Column(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text('Challengers'),
-                        Text(
-                          'view all'.toUpperCase(),
-                          style: const TextStyle(),
-                        )
-                      ],
+                    Padding(
+                      padding: const EdgeInsets.only(top: 16, bottom: 4),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text(
+                            'Challenges',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 13),
+                          ),
+                          Text(
+                            'view all'.toUpperCase(),
+                            style: const TextStyle(
+                                color: Colors.blue,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 10),
+                          )
+                        ],
+                      ),
                     ),
                     Container(
-                      padding: const EdgeInsets.all(16),
+                      padding: const EdgeInsets.only(
+                          right: 16, left: 16, top: 8, bottom: 10),
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius:
@@ -346,7 +357,24 @@ class MyHomePage extends StatelessWidget {
                               const Column(
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
-                                  Icon(Icons.panorama_fisheye_outlined),
+                                  SizedBox(
+                                    width: 35,
+                                    child: Stack(
+                                      children: [
+                                        Icon(
+                                          Icons.panorama_fisheye_outlined,
+                                          color: Colors.amber,
+                                        ),
+                                        Positioned(
+                                          left: 12,
+                                          child: Icon(
+                                            Icons.panorama_fisheye_outlined,
+                                            color: Colors.blueAccent,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                                   Text('2 friends joined',
                                       style: TextStyle(
                                           fontSize: 12,
@@ -356,6 +384,9 @@ class MyHomePage extends StatelessWidget {
                               )
                             ],
                           ),
+                          const SizedBox(
+                            height: 8,
+                          ),
                           const LinearProgressIndicator(
                             value: 0.25,
                           ),
@@ -364,6 +395,120 @@ class MyHomePage extends StatelessWidget {
                     )
                   ],
                 ),
+                Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 6, bottom: 4),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text(
+                            'Habits',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 13),
+                          ),
+                          Text(
+                            'view all'.toUpperCase(),
+                            style: const TextStyle(
+                                color: Colors.blue,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 10),
+                          )
+                        ],
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.only(
+                          right: 16, left: 16, top: 8, bottom: 10),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(20)),
+                          border: Border.all(
+                              color: const Color.fromRGBO(234, 236, 240, 1),
+                              width: 2)),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              CircularPercentIndicator(
+                                radius: 20.0,
+                                lineWidth: 3.0,
+                                percent: 0.25,
+                                center: const Text(
+                                  "💧",
+                                  style: TextStyle(fontSize: 12),
+                                ),
+                                backgroundColor: Colors.grey.shade300,
+                                progressColor: Colors.blue,
+                              ),
+                              const SizedBox(
+                                width: 12,
+                              ),
+                              const Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Drink the water',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      letterSpacing: 0,
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                  Text(
+                                    '500/2000 ML',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w200,
+                                      letterSpacing: 0,
+                                      fontSize: 10,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ],
+                          ),
+                          const Row(
+                            children: [
+                              SizedBox(
+                                width: 50,
+                                child: Stack(
+                                  children: [
+                                    Icon(
+                                      Icons.panorama_fisheye_outlined,
+                                      color: Colors.amber,
+                                    ),
+                                    Positioned(
+                                      left: 12,
+                                      child: Icon(
+                                        Icons.panorama_fisheye_outlined,
+                                        color: Colors.blueAccent,
+                                      ),
+                                    ),
+                                    Positioned(
+                                      left: 24,
+                                      child: Icon(
+                                        Icons.panorama_fisheye_outlined,
+                                        color: Colors.purple,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                width: 12,
+                              ),
+                              HeaderButton(
+                                icon: Icons.add,
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                )
               ],
             ),
           )
