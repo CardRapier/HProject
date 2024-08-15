@@ -354,28 +354,40 @@ class MyHomePage extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              const Column(
+                              Column(
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   SizedBox(
                                     width: 35,
                                     child: Stack(
                                       children: [
-                                        Icon(
-                                          Icons.panorama_fisheye_outlined,
-                                          color: Colors.amber,
+                                        ClipOval(
+                                          child: SizedBox.fromSize(
+                                            size: const Size.fromRadius(12),
+                                            child: const Image(
+                                              image: AssetImage(
+                                                  'assets/images/poki.jpeg'),
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
                                         ),
                                         Positioned(
                                           left: 12,
-                                          child: Icon(
-                                            Icons.panorama_fisheye_outlined,
-                                            color: Colors.blueAccent,
+                                          child: ClipOval(
+                                            child: SizedBox.fromSize(
+                                              size: const Size.fromRadius(12),
+                                              child: const Image(
+                                                image: AssetImage(
+                                                    'assets/images/valkyrae.jpg'),
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
                                           ),
                                         ),
                                       ],
                                     ),
                                   ),
-                                  Text('2 friends joined',
+                                  const Text('2 friends joined',
                                       style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w200,
@@ -469,38 +481,37 @@ class MyHomePage extends StatelessWidget {
                               ),
                             ],
                           ),
-                          const Row(
+                          Row(
                             children: [
                               SizedBox(
-                                width: 50,
+                                width: 70,
                                 child: Stack(
+                                  alignment: Alignment.centerRight,
                                   children: [
-                                    Icon(
-                                      Icons.panorama_fisheye_outlined,
-                                      color: Colors.amber,
-                                    ),
                                     Positioned(
-                                      left: 12,
-                                      child: Icon(
-                                        Icons.panorama_fisheye_outlined,
-                                        color: Colors.blueAccent,
-                                      ),
+                                      right: 16,
+                                      child: friendsPic(
+                                          image: 'assets/images/valkyrae.jpg'),
                                     ),
-                                    Positioned(
-                                      left: 24,
-                                      child: Icon(
-                                        Icons.panorama_fisheye_outlined,
-                                        color: Colors.purple,
-                                      ),
-                                    )
+                                    friendsPic(
+                                        image: 'assets/images/poki.jpeg'),
+
+                                    // Positioned(
+                                    //   left: 36,
+                                    //   child: friendsPic(
+                                    //       image: 'assets/images/faker.jpg'),
+                                    // )
                                   ],
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 12,
                               ),
-                              HeaderButton(
+                              const HeaderButton(
                                 icon: Icons.add,
+                                containerPadding: 6,
+                                borderRadius: 12,
+                                borderWidth: 1,
                               ),
                             ],
                           )
@@ -516,25 +527,54 @@ class MyHomePage extends StatelessWidget {
       ),
     );
   }
+
+  ClipOval friendsPic({required String image}) {
+    return ClipOval(
+      child: Container(
+        color: Colors.white,
+        padding: const EdgeInsets.all(1),
+        child: ClipOval(
+          child: SizedBox.fromSize(
+            size: const Size.fromRadius(12),
+            child: Image(
+              image: AssetImage(image),
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 class HeaderButton extends StatelessWidget {
   final VoidCallback? onTap;
   final IconData icon;
-  final double padding = 16;
-  const HeaderButton({super.key, this.onTap, required this.icon});
+  final double borderRadius;
+  final double containerPadding;
+  final double borderWidth;
+  const HeaderButton(
+      {super.key,
+      this.onTap,
+      required this.icon,
+      this.containerPadding = 12,
+      this.borderRadius = 16,
+      this.borderWidth = 2});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      borderRadius: BorderRadius.all(Radius.elliptical(padding, padding)),
+      borderRadius:
+          BorderRadius.all(Radius.elliptical(borderRadius, borderRadius)),
       onTap: onTap ?? () => print("onTap Header Button"),
       child: Container(
-        padding: const EdgeInsets.all(12),
+        padding: EdgeInsets.all(containerPadding),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.elliptical(padding, padding)),
+          borderRadius:
+              BorderRadius.all(Radius.elliptical(borderRadius, borderRadius)),
           border: Border.all(
-              color: const Color.fromRGBO(234, 236, 240, 1), width: 2),
+              color: const Color.fromRGBO(234, 236, 240, 1),
+              width: borderWidth),
         ),
         child: Icon(
           icon,
