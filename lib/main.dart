@@ -70,6 +70,65 @@ class MyHomePage extends StatelessWidget {
       scrollToToday();
     });
     return Scaffold(
+      bottomNavigationBar: SafeArea(
+        child: Container(
+          height: 70,
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          margin: const EdgeInsets.symmetric(horizontal: 24),
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: const BorderRadius.all(Radius.circular(36)),
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.grey[400]!.withOpacity(0.3),
+                    offset: const Offset(0, 20),
+                    blurRadius: 20)
+              ],
+              border: Border.all(color: Colors.grey.shade200, width: 2)),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              IconButton(
+                onPressed: () => {},
+                icon: const Icon(
+                  Icons.home,
+                  size: 30,
+                ),
+                isSelected: true,
+                selectedIcon:
+                    const Icon(Icons.home, size: 30, color: Color(0xff000DFF)),
+              ),
+              IconButton(
+                  onPressed: () => {},
+                  icon: const Icon(
+                    Icons.explore_outlined,
+                    size: 30,
+                  )),
+              IconButton.filled(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.add,
+                    size: 30,
+                  ),
+                  style: IconButton.styleFrom(
+                    backgroundColor: const Color(0xff000DFF),
+                  )),
+              IconButton(
+                  onPressed: () => {},
+                  icon: const Icon(
+                    Icons.workspace_premium,
+                    size: 30,
+                  )),
+              IconButton(
+                  onPressed: () => {},
+                  icon: const Icon(
+                    Icons.person,
+                    size: 30,
+                  )),
+            ],
+          ),
+        ),
+      ),
       // backgroundColor: const Color.fromRGBO(246, 249, 255, 1),
       backgroundColor: const Color.fromRGBO(246, 249, 255, 1),
       body: Column(
