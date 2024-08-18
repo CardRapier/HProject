@@ -343,133 +343,11 @@ class MyHomePage extends StatelessWidget {
                     ],
                   ),
                 ),
+                // challenges(),
                 Column(
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(top: 16, bottom: 4),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text(
-                            'Challenges',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 13),
-                          ),
-                          Text(
-                            'view all'.toUpperCase(),
-                            style: const TextStyle(
-                                color: Colors.blue,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 10),
-                          )
-                        ],
-                      ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.only(
-                          right: 16, left: 16, top: 8, bottom: 10),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(20)),
-                          border: Border.all(
-                              color: const Color.fromRGBO(234, 236, 240, 1),
-                              width: 2)),
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  Container(
-                                    margin: const EdgeInsets.only(right: 8),
-                                    decoration: const BoxDecoration(
-                                      shape: BoxShape.circle,
-                                    ),
-                                    child: Icon(
-                                      Icons.access_time_filled_outlined,
-                                      color: Colors.deepPurple.shade100,
-                                    ),
-                                  ),
-                                  const Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'Best Runners! 🏃🏻‍♀️',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            letterSpacing: 0),
-                                      ),
-                                      Text(
-                                        '5 days 13 hours left',
-                                        style: TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w200,
-                                            letterSpacing: 0),
-                                      )
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  SizedBox(
-                                    width: 35,
-                                    child: Stack(
-                                      children: [
-                                        ClipOval(
-                                          child: SizedBox.fromSize(
-                                            size: const Size.fromRadius(12),
-                                            child: const Image(
-                                              image: AssetImage(
-                                                  'assets/images/poki.jpeg'),
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
-                                        ),
-                                        Positioned(
-                                          left: 12,
-                                          child: ClipOval(
-                                            child: SizedBox.fromSize(
-                                              size: const Size.fromRadius(12),
-                                              child: const Image(
-                                                image: AssetImage(
-                                                    'assets/images/valkyrae.jpg'),
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  const Text('2 friends joined',
-                                      style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w200,
-                                          letterSpacing: 0))
-                                ],
-                              )
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 8,
-                          ),
-                          const LinearProgressIndicator(
-                            value: 0.25,
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-                Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 6, bottom: 4),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -584,6 +462,127 @@ class MyHomePage extends StatelessWidget {
           )
         ],
       ),
+    );
+  }
+
+  Column challenges() {
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(top: 16, bottom: 4),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                'Challenges',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+              ),
+              Text(
+                'view all'.toUpperCase(),
+                style: const TextStyle(
+                    color: Colors.blue,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 10),
+              )
+            ],
+          ),
+        ),
+        Container(
+          padding:
+              const EdgeInsets.only(right: 16, left: 16, top: 8, bottom: 10),
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              border: Border.all(
+                  color: const Color.fromRGBO(234, 236, 240, 1), width: 2)),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.only(right: 8),
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(
+                          Icons.access_time_filled_outlined,
+                          color: Colors.deepPurple.shade100,
+                        ),
+                      ),
+                      const Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Best Runners! 🏃🏻‍♀️',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                          letterSpacing: 0),
+                          ),
+                          Text(
+                            '5 days 13 hours left',
+                            style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w200,
+                                letterSpacing: 0),
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      SizedBox(
+                        width: 35,
+                        child: Stack(
+                          children: [
+                            ClipOval(
+                              child: SizedBox.fromSize(
+                                size: const Size.fromRadius(12),
+                                child: const Image(
+                                  image: AssetImage('assets/images/poki.jpeg'),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              left: 12,
+                              child: ClipOval(
+                                child: SizedBox.fromSize(
+                                  size: const Size.fromRadius(12),
+                                  child: const Image(
+                                    image: AssetImage(
+                                        'assets/images/valkyrae.jpg'),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const Text('2 friends joined',
+                          style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w200,
+                              letterSpacing: 0))
+                    ],
+                  )
+                ],
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              const LinearProgressIndicator(
+                value: 0.25,
+              ),
+            ],
+          ),
+        )
+      ],
     );
   }
 
