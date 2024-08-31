@@ -187,55 +187,54 @@ class MyHomePage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Container(
-                    height: 35,
-                    decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(20),
-                        ),
-                        color: Colors.grey.shade200),
-                    child: DefaultTabController(
-                      length: 2,
-                      child: TabBar(
-                          indicatorSize: TabBarIndicatorSize.tab,
-                          dividerColor: Colors.transparent,
-                          indicatorPadding: const EdgeInsets.symmetric(
-                              horizontal: 2, vertical: 2),
-                          labelColor: Colors.blue,
-                          indicator: const BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
-                          ),
-                          tabs: [
-                            const Text(
-                              'Today',
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Text(
-                                  'Clubs',
-                                ),
-                                Container(
-                                  margin: const EdgeInsetsDirectional.only(
-                                      start: 10),
-                                  padding: const EdgeInsets.all(6),
-                                  decoration: const BoxDecoration(
-                                      color: Colors.white,
-                                      shape: BoxShape.circle),
-                                  child: const Center(
-                                      child: Text(
-                                    '2',
-                                    style: TextStyle(
-                                        color: Colors.blue, fontSize: 10),
-                                  )),
-                                )
-                              ],
-                            )
-                          ]),
-                    ),
-                  ),
-                  //TODO: remove general padding, add padding to header, and here just add let vertical padding
+                  // Container(
+                  //   height: 35,
+                  //   decoration: BoxDecoration(
+                  //       borderRadius: const BorderRadius.all(
+                  //         Radius.circular(20),
+                  //       ),
+                  //       color: Colors.grey.shade200),
+                  //   child: DefaultTabController(
+                  //     length: 2,
+                  //     child: TabBar(
+                  //         indicatorSize: TabBarIndicatorSize.tab,
+                  //         dividerColor: Colors.transparent,
+                  //         indicatorPadding: const EdgeInsets.symmetric(
+                  //             horizontal: 2, vertical: 2),
+                  //         labelColor: Colors.blue,
+                  //         indicator: const BoxDecoration(
+                  //           color: Colors.white,
+                  //           borderRadius: BorderRadius.all(Radius.circular(20)),
+                  //         ),
+                  //         tabs: [
+                  //           const Text(
+                  //             'Today',
+                  //           ),
+                  //           Row(
+                  //             mainAxisAlignment: MainAxisAlignment.center,
+                  //             children: [
+                  //               const Text(
+                  //                 'Clubs',
+                  //               ),
+                  //               Container(
+                  //                 margin: const EdgeInsetsDirectional.only(
+                  //                     start: 10),
+                  //                 padding: const EdgeInsets.all(6),
+                  //                 decoration: const BoxDecoration(
+                  //                     color: Colors.white,
+                  //                     shape: BoxShape.circle),
+                  //                 child: const Center(
+                  //                     child: Text(
+                  //                   '2',
+                  //                   style: TextStyle(
+                  //                       color: Colors.blue, fontSize: 10),
+                  //                 )),
+                  //               )
+                  //             ],
+                  //           )
+                  //         ]),
+                  //   ),
+                  // ),
                 ],
               ),
             ),
@@ -290,59 +289,59 @@ class MyHomePage extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 32),
             child: Column(
               children: [
-                Container(
-                  width: screenSize.width - 64,
-                  padding: const EdgeInsets.all(16),
-                  decoration: const BoxDecoration(
-                      gradient: LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          stops: [0, 1],
-                          colors: [Color(0xff6B73FF), Color(0xff000DFF)]),
-                      borderRadius: BorderRadius.all(Radius.circular(20))),
-                  child: Row(
-                    children: [
-                      CircularPercentIndicator(
-                        radius: 20.0,
-                        lineWidth: 3.0,
-                        percent: 0.25,
-                        center: const Text(
-                          "%25",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 12,
-                            letterSpacing: 0,
-                          ),
-                        ),
-                        progressColor: Colors.white,
-                      ),
-                      const SizedBox(
-                        width: 12,
-                      ),
-                      const Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Your daily goals almost done! 🔥',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                letterSpacing: 0,
-                              )),
-                          SizedBox(
-                            height: 2,
-                          ),
-                          Text('1 of 4 completed',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w300,
-                                fontSize: 12,
-                                letterSpacing: 0,
-                              ))
-                        ],
-                      )
-                    ],
-                  ),
-                ),
+                // Container(
+                //   width: screenSize.width - 64,
+                //   padding: const EdgeInsets.all(16),
+                //   decoration: const BoxDecoration(
+                //       gradient: LinearGradient(
+                //           begin: Alignment.topLeft,
+                //           end: Alignment.bottomRight,
+                //           stops: [0, 1],
+                //           colors: [Color(0xff6B73FF), Color(0xff000DFF)]),
+                //       borderRadius: BorderRadius.all(Radius.circular(20))),
+                //   child: Row(
+                //     children: [
+                //       CircularPercentIndicator(
+                //         radius: 20.0,
+                //         lineWidth: 3.0,
+                //         percent: 0.25,
+                //         center: const Text(
+                //           "%25",
+                //           style: TextStyle(
+                //             color: Colors.white,
+                //             fontSize: 12,
+                //             letterSpacing: 0,
+                //           ),
+                //         ),
+                //         progressColor: Colors.white,
+                //       ),
+                //       const SizedBox(
+                //         width: 12,
+                //       ),
+                //       const Column(
+                //         crossAxisAlignment: CrossAxisAlignment.start,
+                //         children: [
+                //           Text('Your daily goals almost done! 🔥',
+                //               style: TextStyle(
+                //                 color: Colors.white,
+                //                 fontWeight: FontWeight.bold,
+                //                 letterSpacing: 0,
+                //               )),
+                //           SizedBox(
+                //             height: 2,
+                //           ),
+                //           Text('1 of 4 completed',
+                //               style: TextStyle(
+                //                 color: Colors.white,
+                //                 fontWeight: FontWeight.w300,
+                //                 fontSize: 12,
+                //                 letterSpacing: 0,
+                //               ))
+                //         ],
+                //       )
+                //     ],
+                //   ),
+                // ),
                 // challenges(),
                 Column(
                   children: [
