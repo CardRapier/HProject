@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:h_project/components/text/text.dart';
-import 'package:h_project/utils/design.dart';
+import 'package:h_project/shared/presentation/components/my_text.dart';
+import 'package:h_project/shared/presentation/design.dart';
 import 'package:intl/intl.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';

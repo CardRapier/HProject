@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:h_project/utils/design.dart';
+import 'package:h_project/shared/presentation/design.dart';
 
 class MyText extends StatelessWidget {
   final String text;
