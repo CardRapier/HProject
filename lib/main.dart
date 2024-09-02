@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:h_project/components/body_text.dart';
+import 'package:h_project/utils/design.dart';
 import 'package:intl/intl.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
@@ -38,6 +40,7 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
+        fontFamily: 'Montserrat',
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
@@ -105,7 +108,7 @@ class MyHomePage extends StatelessWidget {
                     size: 30,
                   )),
               IconButton.filled(
-                  onPressed: () {},
+                  onPressed: () => _showHabitModal(context),
                   icon: const Icon(
                     Icons.add,
                     size: 30,
@@ -160,17 +163,10 @@ class MyHomePage extends StatelessWidget {
                         const Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              'Hi, Santi 👋🏽',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                              ),
-                            ),
-                            Text(
+                            BodyText.title('Hi, Santi 👋🏽'),
+                            BodyText.paragraph(
                               "Let's make habits together!",
-                              style: TextStyle(color: Color(0xff9B9BA1)),
-                            )
+                            ),
                           ],
                         ),
                         Container(
@@ -271,14 +267,9 @@ class MyHomePage extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                             color: isSelected ? Colors.blue : Colors.black),
                       ),
-                      Text(
-                        dateFormat.format(date).toUpperCase(),
-                        style: TextStyle(
-                            fontSize: 10,
-                            fontWeight:
-                                isSelected ? FontWeight.bold : FontWeight.w200,
-                            color: isSelected ? Colors.blue : Colors.black),
-                      )
+                      BodyText.chip(dateFormat.format(date).toUpperCase(),
+                          withGradient: isSelected,
+                          color: isSelected ? null : MyColors.black20),
                     ],
                   ),
                 );
@@ -517,8 +508,7 @@ class MyHomePage extends StatelessWidget {
                           Text(
                             'Best Runners! 🏃🏻‍♀️',
                             style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                          letterSpacing: 0),
+                                fontWeight: FontWeight.bold, letterSpacing: 0),
                           ),
                           Text(
                             '5 days 13 hours left',
@@ -606,17 +596,23 @@ class MyHomePage extends StatelessWidget {
 
 class HeaderButton extends StatelessWidget {
   final VoidCallback? onTap;
-  final IconData icon;
+  final IconData? icon;
+  final Widget? content;
   final double borderRadius;
   final double containerPadding;
+  final EdgeInsetsGeometry? customPadding;
   final double borderWidth;
   const HeaderButton(
       {super.key,
       this.onTap,
-      required this.icon,
+      this.icon,
       this.containerPadding = 12,
       this.borderRadius = 16,
-      this.borderWidth = 2});
+      this.borderWidth = 2,
+      this.content,
+      this.customPadding})
+      : assert(icon != null || content != null,
+            'Either icon or textIcon must be provided.');
 
   @override
   Widget build(BuildContext context) {
@@ -625,7 +621,7 @@ class HeaderButton extends StatelessWidget {
           BorderRadius.all(Radius.elliptical(borderRadius, borderRadius)),
       onTap: onTap ?? () => print("onTap Header Button"),
       child: Container(
-        padding: EdgeInsets.all(containerPadding),
+        padding: customPadding ?? EdgeInsets.all(containerPadding),
         decoration: BoxDecoration(
           borderRadius:
               BorderRadius.all(Radius.elliptical(borderRadius, borderRadius)),
@@ -633,11 +629,268 @@ class HeaderButton extends StatelessWidget {
               color: const Color.fromRGBO(234, 236, 240, 1),
               width: borderWidth),
         ),
-        child: Icon(
-          icon,
-          size: 24,
-        ),
+        child: content ??
+            Icon(
+              icon,
+              size: 24,
+            ),
       ),
     );
   }
+}
+
+void _showHabitModal(BuildContext context) {
+  showModalBottomSheet(
+    context: context,
+    backgroundColor: Colors.transparent,
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(25.0)),
+    ),
+    builder: (context) {
+      return Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            // First Row: Quit Bad Habit and New Good Habit
+            Row(
+              children: [
+                _buildOption(
+                  context,
+                  icon: Icons.cancel,
+                  color: Colors.red,
+                  title: "Quit Bad Habit",
+                  subtitle: "Never too late...",
+                  onTap: () {
+                    Navigator.pop(context); // Close the current modal
+                    Future.delayed(const Duration(milliseconds: 100), () {
+                      _showCreateHabitModal(context, "New Good Habit");
+                    });
+                  },
+                ),
+                const SizedBox(width: 8), // Space between the two options
+                _buildOption(
+                  context,
+                  icon: Icons.check_circle,
+                  color: Colors.green,
+                  title: "New Good Habit",
+                  subtitle: "For a better life",
+                  onTap: () {
+                    Navigator.pop(context); // Close the current modal
+                    Future.delayed(const Duration(milliseconds: 100), () {
+                      _showCreateHabitModal(context, "New Good Habit");
+                    });
+                  },
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            // Second Row: Add Mood
+            _buildMoodSelector(),
+            const SizedBox(height: 20),
+          ],
+        ),
+      );
+    },
+  );
+}
+
+Widget _buildOption(
+  BuildContext context, {
+  required IconData icon,
+  required Color color,
+  required String title,
+  required String subtitle,
+  required VoidCallback onTap,
+}) {
+  return Expanded(
+    child: GestureDetector(
+      onTap: onTap,
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+        ),
+        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Column(
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 12),
+                  textAlign: TextAlign.start,
+                ),
+                Text(
+                  subtitle,
+                  style: const TextStyle(color: Colors.grey, fontSize: 12),
+                  textAlign: TextAlign.start,
+                ),
+              ],
+            ),
+            Icon(icon, color: color, size: 30),
+          ],
+        ),
+      ),
+    ),
+  );
+}
+
+Widget moodIcon(icon) {
+  return HeaderButton(
+    content: Text(
+      icon,
+      style: const TextStyle(fontSize: 22),
+    ),
+    customPadding:
+        const EdgeInsetsDirectional.symmetric(vertical: 8, horizontal: 12),
+  );
+}
+
+Widget _buildMoodSelector() {
+  return Container(
+    decoration: BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(16),
+    ),
+    padding: const EdgeInsets.all(16),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        const Text(
+          "Add Mood",
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+          textAlign: TextAlign.center,
+        ),
+        const Text(
+          "How're you feeling?",
+          style: TextStyle(color: Colors.grey, fontSize: 14),
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 12),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            moodIcon('🤬'),
+            moodIcon('☹️'),
+            moodIcon('😐'),
+            moodIcon('🙂'),
+            moodIcon('😍'),
+          ],
+        ),
+      ],
+    ),
+  );
+}
+
+void _showCreateHabitModal(BuildContext context, String habitType) {
+  showModalBottomSheet(
+    context: context,
+    backgroundColor: Colors.white,
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(25.0)),
+    ),
+    builder: (context) {
+      return Padding(
+        padding: const EdgeInsets.all(32.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            greyText('New good habit'.toUpperCase()),
+            const SizedBox(height: 8),
+            basicCard(children: [
+              const Text('Create Custom Habit'),
+              const HeaderButton(
+                icon: Icons.add,
+                containerPadding: 8,
+                borderRadius: 12,
+                borderWidth: 1,
+              ),
+            ]),
+            const SizedBox(height: 8),
+            greyText('Popular habits'.toUpperCase()),
+            // Add your form fields or widgets for habit creation here
+            const SizedBox(height: 8),
+            SizedBox(
+              height: 102,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: [
+                  Container(
+                    width: 128,
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: const Color(0xffFCDCD3),
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          height: 32,
+                          width: 32,
+                          child: const Center(
+                              child: Text(
+                            '🚶🏽',
+                            style: TextStyle(fontSize: 18),
+                          )),
+                        ),
+                        const SizedBox(
+                          height: 8,
+                        ),
+                        const Text(
+                          'Walk',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          '10 KM',
+                          style: TextStyle(
+                              fontSize: 10, color: Colors.grey.shade600),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
+      );
+    },
+  );
+}
+
+Widget greyText(text, {double size = 10}) {
+  return Text(
+    text,
+    style: TextStyle(
+        color: Colors.grey,
+        fontSize: size,
+        letterSpacing: 1,
+        fontWeight: FontWeight.bold),
+    textAlign: TextAlign.start,
+  );
+}
+
+Widget basicCard({children}) {
+  return Container(
+    padding: const EdgeInsets.only(right: 16, left: 16, top: 8, bottom: 10),
+    decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: const BorderRadius.all(Radius.circular(20)),
+        border: Border.all(
+            color: const Color.fromRGBO(234, 236, 240, 1), width: 2)),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: children,
+    ),
+  );
 }
