@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:h_project/components/body_text.dart';
+import 'package:h_project/components/text/text.dart';
 import 'package:h_project/utils/design.dart';
 import 'package:intl/intl.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -163,9 +163,10 @@ class MyHomePage extends StatelessWidget {
                         const Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            BodyText.title('Hi, Santi 👋🏽'),
-                            BodyText.paragraph(
+                            MyText.title('Hi, Santi 👋🏽'),
+                            MyText.paragraph(
                               "Let's make habits together!",
+                              color: MyColors.black40,
                             ),
                           ],
                         ),
@@ -260,16 +261,15 @@ class MyHomePage extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
+                      MyText.h6(
                         '${i + 1}',
-                        style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: isSelected ? Colors.blue : Colors.black),
+                        withGradient: isSelected,
+                        color: MyColors.black,
                       ),
-                      BodyText.chip(dateFormat.format(date).toUpperCase(),
+                      MyText.chip(dateFormat.format(date),
+                          upperCase: true,
                           withGradient: isSelected,
-                          color: isSelected ? null : MyColors.black20),
+                          color: MyColors.black20),
                     ],
                   ),
                 );
@@ -336,22 +336,18 @@ class MyHomePage extends StatelessWidget {
                 // challenges(),
                 Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 16, bottom: 4),
+                    const Padding(
+                      padding: EdgeInsets.only(top: 16, bottom: 4),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text(
+                          MyText.paragraph(
                             'Habits',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 13),
                           ),
-                          Text(
-                            'view all'.toUpperCase(),
-                            style: const TextStyle(
-                                color: Colors.blue,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 10),
+                          MyText.chip(
+                            'view all',
+                            upperCase: true,
+                            color: MyColors.blue,
                           )
                         ],
                       ),
@@ -375,9 +371,12 @@ class MyHomePage extends StatelessWidget {
                                 radius: 20.0,
                                 lineWidth: 3.0,
                                 percent: 0.25,
-                                center: const Text(
-                                  "💧",
-                                  style: TextStyle(fontSize: 12),
+                                center: const Padding(
+                                  padding: EdgeInsets.only(left: 4.0),
+                                  child: Text(
+                                    "💧",
+                                    style: TextStyle(fontSize: 14),
+                                  ),
                                 ),
                                 backgroundColor: Colors.grey.shade300,
                                 progressColor: Colors.blue,
@@ -388,22 +387,8 @@ class MyHomePage extends StatelessWidget {
                               const Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    'Drink the water',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      letterSpacing: 0,
-                                      fontSize: 12,
-                                    ),
-                                  ),
-                                  Text(
-                                    '500/2000 ML',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w200,
-                                      letterSpacing: 0,
-                                      fontSize: 10,
-                                    ),
-                                  )
+                                  MyText.paragraph('Drink the water'),
+                                  MyText.alternative('500/2000 ML')
                                 ],
                               ),
                             ],
@@ -714,23 +699,15 @@ Widget _buildOption(
         ),
         padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  title,
-                  style: const TextStyle(
-                      fontWeight: FontWeight.bold, fontSize: 12),
-                  textAlign: TextAlign.start,
-                ),
-                Text(
-                  subtitle,
-                  style: const TextStyle(color: Colors.grey, fontSize: 12),
-                  textAlign: TextAlign.start,
-                ),
+                MyText.paragraph(title),
+                MyText.paragraphBook(subtitle),
               ],
             ),
+            const SizedBox(width: 4),
             Icon(icon, color: color, size: 30),
           ],
         ),
@@ -760,14 +737,12 @@ Widget _buildMoodSelector() {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const Text(
+        const MyText.paragraph(
           "Add Mood",
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           textAlign: TextAlign.center,
         ),
-        const Text(
+        const MyText.alternative(
           "How're you feeling?",
-          style: TextStyle(color: Colors.grey, fontSize: 14),
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 12),
@@ -800,10 +775,14 @@ void _showCreateHabitModal(BuildContext context, String habitType) {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            greyText('New good habit'.toUpperCase()),
+            const MyText.chip(
+              'New good habit',
+              upperCase: true,
+              color: MyColors.black40,
+            ),
             const SizedBox(height: 8),
             basicCard(children: [
-              const Text('Create Custom Habit'),
+              const MyText.paragraph('Create Custom Habit'),
               const HeaderButton(
                 icon: Icons.add,
                 containerPadding: 8,
@@ -812,11 +791,14 @@ void _showCreateHabitModal(BuildContext context, String habitType) {
               ),
             ]),
             const SizedBox(height: 8),
-            greyText('Popular habits'.toUpperCase()),
-            // Add your form fields or widgets for habit creation here
+            const MyText.chip(
+              'Popular habits',
+              upperCase: true,
+              color: MyColors.black40,
+            ),
             const SizedBox(height: 8),
             SizedBox(
-              height: 102,
+              height: 106,
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: [
@@ -846,14 +828,10 @@ void _showCreateHabitModal(BuildContext context, String habitType) {
                         const SizedBox(
                           height: 8,
                         ),
-                        const Text(
-                          'Walk',
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        Text(
+                        const MyText.paragraph('Walk'),
+                        const MyText.alternative(
                           '10 KM',
-                          style: TextStyle(
-                              fontSize: 10, color: Colors.grey.shade600),
+                          color: MyColors.black60,
                         ),
                       ],
                     ),

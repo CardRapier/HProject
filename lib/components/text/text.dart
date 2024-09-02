@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:h_project/utils/design.dart';
 
-class BodyText extends StatelessWidget {
+class MyText extends StatelessWidget {
   final String text;
   final FontWeight? fontWeight;
   final double? fontSize;
   final Color? color;
   final double? letterSpacing;
   final bool? withGradient;
+  final TextAlign? textAlign;
+  final bool? upperCase;
 
-  const BodyText.title(
+  const MyText.title(
     this.text, {
     super.key,
     this.fontWeight = FontWeight.w500,
@@ -17,10 +19,11 @@ class BodyText extends StatelessWidget {
     this.color = MyColors.black,
     this.letterSpacing,
     this.withGradient,
-  }) : assert((withGradient == null || withGradient == false) || color == null,
-            'Color must be null when withGradient is not null');
+    this.textAlign,
+    this.upperCase,
+  });
 
-  const BodyText.paragraph(
+  const MyText.paragraph(
     this.text, {
     super.key,
     this.fontWeight = FontWeight.w500,
@@ -28,32 +31,35 @@ class BodyText extends StatelessWidget {
     this.color,
     this.letterSpacing,
     this.withGradient,
-  }) : assert((withGradient == null || withGradient == false) || color == null,
-            'Color must be null when withGradient is not null');
+    this.textAlign,
+    this.upperCase,
+  });
 
-  const BodyText.paragraphBook(
+  const MyText.paragraphBook(
     this.text, {
     super.key,
     this.fontWeight,
     this.fontSize,
-    this.color = const Color(0xff9B9BA1),
+    this.color = MyColors.black40,
     this.letterSpacing,
     this.withGradient,
-  }) : assert((withGradient == null || withGradient == false) || color == null,
-            'Color must be null when withGradient is not null');
+    this.textAlign,
+    this.upperCase,
+  });
 
-  const BodyText.alternative(
+  const MyText.alternative(
     this.text, {
     super.key,
     this.fontWeight,
     this.fontSize = 12,
-    this.color = const Color(0xff9B9BA1),
+    this.color = MyColors.black40,
     this.letterSpacing,
     this.withGradient,
-  }) : assert((withGradient == null || withGradient == false) || color == null,
-            'Color must be null when withGradient is not null');
+    this.textAlign,
+    this.upperCase,
+  });
 
-  const BodyText.chip(
+  const MyText.chip(
     this.text, {
     super.key,
     this.fontWeight = FontWeight.bold,
@@ -61,28 +67,48 @@ class BodyText extends StatelessWidget {
     this.color,
     this.letterSpacing = 1,
     this.withGradient,
-  }) : assert((withGradient == null || withGradient == false) || color == null,
-            'Color must be null when withGradient is not null');
+    this.textAlign,
+    this.upperCase,
+  });
+
+  const MyText.h6(
+    this.text, {
+    super.key,
+    this.fontWeight = FontWeight.w500,
+    this.fontSize = 20,
+    this.color,
+    this.letterSpacing,
+    this.withGradient,
+    this.textAlign,
+    this.upperCase,
+  });
 
   @override
   Widget build(BuildContext context) {
+    Color? finalColor = color;
+    finalColor ??= MyColors.black;
+    if (withGradient == true) finalColor = null;
+
+    String finalText = text;
+    if (upperCase == true) finalText = text.toUpperCase();
     Widget mainText = Text(
-      text,
+      finalText,
       style: TextStyle(
         fontWeight: fontWeight,
         fontSize: fontSize,
-        color: color,
+        color: finalColor,
         letterSpacing: letterSpacing ?? 0,
       ),
+      textAlign: textAlign,
     );
 
-    if (withGradient == true) mainText = _gradientTextStyle(mainText);
+    if (withGradient == true) mainText = gradientTextStyle(mainText);
 
     return mainText;
   }
 }
 
-ShaderMask _gradientTextStyle(child) {
+ShaderMask gradientTextStyle(child) {
   return ShaderMask(
     blendMode: BlendMode.srcIn,
     shaderCallback: (bounds) => MyColors.gradientBlue
