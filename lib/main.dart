@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:h_project/core/routing/app_router.dart';
+import 'package:h_project/core/routing/routes.dart';
 import 'package:h_project/shared/presentation/components/my_text.dart';
 import 'package:h_project/shared/presentation/design.dart';
 import 'package:intl/intl.dart';
@@ -21,8 +24,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
+    return MaterialApp.router(
+      title: 'My Routiner',
+      routerConfig: AppRouter.router,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         // This is the theme of your application.
@@ -44,7 +48,6 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(),
     );
   }
 }
@@ -783,11 +786,15 @@ void _showCreateHabitModal(BuildContext context, String habitType) {
             const SizedBox(height: 8),
             basicCard(children: [
               const MyText.paragraph('Create Custom Habit'),
-              const HeaderButton(
+              HeaderButton(
                 icon: Icons.add,
                 containerPadding: 8,
                 borderRadius: 12,
                 borderWidth: 1,
+                onTap: () {
+                  Navigator.pop(context);
+                  GoRouter.of(context).pushNamed(Routes.CustomHabit.name);
+                },
               ),
             ]),
             const SizedBox(height: 8),
