@@ -136,7 +136,7 @@ class MyHomePage extends StatelessWidget {
         ),
       ),
       // backgroundColor: const Color.fromRGBO(246, 249, 255, 1),
-      backgroundColor: const Color.fromRGBO(246, 249, 255, 1),
+      backgroundColor: MyColors.background,
       body: Column(
         children: [
           Container(

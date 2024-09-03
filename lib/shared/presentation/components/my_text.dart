@@ -83,6 +83,18 @@ class MyText extends StatelessWidget {
     this.upperCase,
   });
 
+  const MyText.h5(
+    this.text, {
+    super.key,
+    this.fontWeight = FontWeight.bold,
+    this.fontSize = 24,
+    this.color,
+    this.letterSpacing = -1,
+    this.withGradient,
+    this.textAlign,
+    this.upperCase,
+  });
+
   @override
   Widget build(BuildContext context) {
     Color? finalColor = color;
