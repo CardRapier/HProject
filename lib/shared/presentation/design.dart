@@ -5,8 +5,14 @@ class MyColors {
   static const Color black60 = Color(0xff686873);
   static const Color black40 = Color(0xff9B9BA1);
   static const Color black20 = Color(0xffCDCDD0);
-  static const Color background = Color(0xffF6F9FF);
+  static const Color black10 = Color(0xffEAECF0);
+
   static const Color blue = Color(0xff3843FF);
+  static const Color darkBlue10 = Color(0xffF3F4F6);
+
+  static const Color orange = Color(0xffF15223);
+
+  static const Color background = Color(0xffF6F9FF);
   static const LinearGradient gradientBlue = LinearGradient(
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,

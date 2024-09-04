@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:h_project/core/routing/app_router.dart';
 import 'package:h_project/core/routing/routes.dart';
+import 'package:h_project/shared/presentation/components/basic_card.dart';
 import 'package:h_project/shared/presentation/components/my_text.dart';
 import 'package:h_project/shared/presentation/design.dart';
 import 'package:intl/intl.dart';
@@ -363,7 +364,7 @@ class MyHomePage extends StatelessWidget {
                           borderRadius:
                               const BorderRadius.all(Radius.circular(20)),
                           border: Border.all(
-                              color: const Color.fromRGBO(234, 236, 240, 1),
+                              color: MyColors.black10,
                               width: 2)),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -472,7 +473,7 @@ class MyHomePage extends StatelessWidget {
               color: Colors.white,
               borderRadius: const BorderRadius.all(Radius.circular(20)),
               border: Border.all(
-                  color: const Color.fromRGBO(234, 236, 240, 1), width: 2)),
+                  color: MyColors.black10, width: 2)),
           child: Column(
             children: [
               Row(
@@ -614,7 +615,7 @@ class HeaderButton extends StatelessWidget {
           borderRadius:
               BorderRadius.all(Radius.elliptical(borderRadius, borderRadius)),
           border: Border.all(
-              color: const Color.fromRGBO(234, 236, 240, 1),
+              color: MyColors.black10,
               width: borderWidth),
         ),
         child: content ??
@@ -784,7 +785,7 @@ void _showCreateHabitModal(BuildContext context, String habitType) {
               color: MyColors.black40,
             ),
             const SizedBox(height: 8),
-            basicCard(children: [
+            BasicCard(children: [
               const MyText.paragraph('Create Custom Habit'),
               HeaderButton(
                 icon: Icons.add,
@@ -853,29 +854,3 @@ void _showCreateHabitModal(BuildContext context, String habitType) {
   );
 }
 
-Widget greyText(text, {double size = 10}) {
-  return Text(
-    text,
-    style: TextStyle(
-        color: Colors.grey,
-        fontSize: size,
-        letterSpacing: 1,
-        fontWeight: FontWeight.bold),
-    textAlign: TextAlign.start,
-  );
-}
-
-Widget basicCard({children}) {
-  return Container(
-    padding: const EdgeInsets.only(right: 16, left: 16, top: 8, bottom: 10),
-    decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: const BorderRadius.all(Radius.circular(20)),
-        border: Border.all(
-            color: const Color.fromRGBO(234, 236, 240, 1), width: 2)),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: children,
-    ),
-  );
-}
