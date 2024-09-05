@@ -3,7 +3,9 @@ import 'package:go_router/go_router.dart';
 import 'package:h_project/core/routing/app_router.dart';
 import 'package:h_project/core/routing/routes.dart';
 import 'package:h_project/shared/presentation/components/basic_card.dart';
+import 'package:h_project/shared/presentation/components/box_button.dart';
 import 'package:h_project/shared/presentation/components/my_text.dart';
+import 'package:h_project/shared/presentation/components/segments_control.dart';
 import 'package:h_project/shared/presentation/design.dart';
 import 'package:intl/intl.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -58,7 +60,6 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
     final now = DateTime.now();
     final daysOfMonth = DateUtils.getDaysInMonth(now.year, now.month);
     final DateFormat dateFormat = DateFormat('EEE');
@@ -150,10 +151,10 @@ class MyHomePage extends StatelessWidget {
                   const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      HeaderButton(
+                      BoxButton(
                         icon: Icons.calendar_month_rounded,
                       ),
-                      HeaderButton(
+                      BoxButton(
                         icon: Icons.notifications_on_outlined,
                       )
                     ],
@@ -188,54 +189,27 @@ class MyHomePage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  // Container(
-                  //   height: 35,
-                  //   decoration: BoxDecoration(
-                  //       borderRadius: const BorderRadius.all(
-                  //         Radius.circular(20),
-                  //       ),
-                  //       color: Colors.grey.shade200),
-                  //   child: DefaultTabController(
-                  //     length: 2,
-                  //     child: TabBar(
-                  //         indicatorSize: TabBarIndicatorSize.tab,
-                  //         dividerColor: Colors.transparent,
-                  //         indicatorPadding: const EdgeInsets.symmetric(
-                  //             horizontal: 2, vertical: 2),
-                  //         labelColor: Colors.blue,
-                  //         indicator: const BoxDecoration(
-                  //           color: Colors.white,
-                  //           borderRadius: BorderRadius.all(Radius.circular(20)),
-                  //         ),
-                  //         tabs: [
-                  //           const Text(
-                  //             'Today',
-                  //           ),
-                  //           Row(
-                  //             mainAxisAlignment: MainAxisAlignment.center,
-                  //             children: [
-                  //               const Text(
-                  //                 'Clubs',
-                  //               ),
-                  //               Container(
-                  //                 margin: const EdgeInsetsDirectional.only(
-                  //                     start: 10),
-                  //                 padding: const EdgeInsets.all(6),
-                  //                 decoration: const BoxDecoration(
-                  //                     color: Colors.white,
-                  //                     shape: BoxShape.circle),
-                  //                 child: const Center(
-                  //                     child: Text(
-                  //                   '2',
-                  //                   style: TextStyle(
-                  //                       color: Colors.blue, fontSize: 10),
-                  //                 )),
-                  //               )
-                  //             ],
-                  //           )
-                  //         ]),
-                  //   ),
-                  // ),
+                  SegmentsControl(tabs: [
+                    const MyText.paragraph('Today'),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const MyText.paragraph('Clubs'),
+                        Container(
+                          margin: const EdgeInsetsDirectional.only(start: 10),
+                          padding: const EdgeInsets.all(6),
+                          decoration: const BoxDecoration(
+                              color: Colors.white, shape: BoxShape.circle),
+                          child: const Center(
+                              child: Text(
+                            '2',
+                            style:
+                                TextStyle(color: MyColors.blue, fontSize: 10),
+                          )),
+                        )
+                      ],
+                    )
+                  ])
                 ],
               ),
             ),
@@ -423,7 +397,7 @@ class MyHomePage extends StatelessWidget {
                               const SizedBox(
                                 width: 12,
                               ),
-                              const HeaderButton(
+                              const BoxButton(
                                 icon: Icons.add,
                                 containerPadding: 6,
                                 borderRadius: 12,
@@ -583,50 +557,6 @@ class MyHomePage extends StatelessWidget {
   }
 }
 
-class HeaderButton extends StatelessWidget {
-  final VoidCallback? onTap;
-  final IconData? icon;
-  final Widget? content;
-  final double borderRadius;
-  final double containerPadding;
-  final EdgeInsetsGeometry? customPadding;
-  final double borderWidth;
-  const HeaderButton(
-      {super.key,
-      this.onTap,
-      this.icon,
-      this.containerPadding = 12,
-      this.borderRadius = 16,
-      this.borderWidth = 2,
-      this.content,
-      this.customPadding})
-      : assert(icon != null || content != null,
-            'Either icon or textIcon must be provided.');
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      borderRadius:
-          BorderRadius.all(Radius.elliptical(borderRadius, borderRadius)),
-      onTap: onTap ?? () => print("onTap Header Button"),
-      child: Container(
-        padding: customPadding ?? EdgeInsets.all(containerPadding),
-        decoration: BoxDecoration(
-          borderRadius:
-              BorderRadius.all(Radius.elliptical(borderRadius, borderRadius)),
-          border: Border.all(
-              color: MyColors.black10,
-              width: borderWidth),
-        ),
-        child: content ??
-            Icon(
-              icon,
-              size: 24,
-            ),
-      ),
-    );
-  }
-}
 
 void _showHabitModal(BuildContext context) {
   showModalBottomSheet(
@@ -721,7 +651,7 @@ Widget _buildOption(
 }
 
 Widget moodIcon(icon) {
-  return HeaderButton(
+  return BoxButton(
     content: Text(
       icon,
       style: const TextStyle(fontSize: 22),
@@ -787,7 +717,7 @@ void _showCreateHabitModal(BuildContext context, String habitType) {
             const SizedBox(height: 8),
             BasicCard(children: [
               const MyText.paragraph('Create Custom Habit'),
-              HeaderButton(
+              BoxButton(
                 icon: Icons.add,
                 containerPadding: 8,
                 borderRadius: 12,
