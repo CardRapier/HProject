@@ -19,3 +19,17 @@ class MyColors {
       stops: [0, 1],
       colors: [Color(0xff6B73FF), Color(0xff000DFF)]);
 }
+
+class MyDesign {
+  static const BoxDecoration basicBoxDecoration = BoxDecoration(
+      color: MyColors.darkBlue10,
+      borderRadius: BorderRadius.all(Radius.circular(12)));
+  static const List<BoxShadow> basicBoxShadow = <BoxShadow>[
+    BoxShadow(
+      color: Color(0x0D232C5D),
+      spreadRadius: 0,
+      blurRadius: 68,
+      offset: Offset(58, 26),
+    ),
+  ];
+}

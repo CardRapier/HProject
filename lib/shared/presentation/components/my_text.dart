@@ -98,7 +98,6 @@ class MyText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Color? finalColor = color;
-    finalColor ??= MyColors.black;
     if (withGradient == true) finalColor = null;
 
     String finalText = text;
